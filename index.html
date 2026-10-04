@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">SKINVIT - estētiskās kosmetoloģijas centrs, Rēzekne</title>
+<meta name="description" content="SKINVIT - estētiskās kosmetoloģijas centrs Rēzeknē, Brīvības iela 2/4. Sejas un ķermeņa procedūras, aparātprocedūras, vaksācija.">
+<script>
+  (function(){
+    var d = document.documentElement;
+    d.classList.add('js');
+    var t = 'light';
+    try{ if(localStorage.getItem('skv-theme') === 'dark') t = 'dark'; }catch(e){}
+    d.setAttribute('data-theme', t);
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F5;
+    --panel:#F0EBE4;
+    --card:#FFFFFF;
+    --ink:#171514;
+    --ink-soft:#6A625B;
+    --line:rgba(23,21,20,.14);
+    --accent:#A68B6F;
+    --accent-deep:#8A7056;
+    --shadow:0 28px 55px -34px rgba(23,21,20,.35);
+    --font-head:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --font-body:'Jost','Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+    --maxw:1160px;
+    --fade:.25s;
+    --fade-theme:.45s;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F0E0D;
+    --panel:#161412;
+    --card:#1B1917;
+    --ink:#F2EEE8;
+    --ink-soft:#B1A89E;
+    --line:rgba(242,238,232,.16);
+    --accent:#C7AB8B;
+    --accent-deep:#D8BE9F;
+    --shadow:0 28px 55px -34px rgba(0,0,0,.8);
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;transition-delay:0s !important;}
+  }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  img,svg{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;transition:color var(--fade) ease,background-color var(--fade) ease,border-color var(--fade) ease,opacity var(--fade) ease;}
+  h1,h2,h3,h4{font-family:var(--font-head);font-weight:500;margin:0;color:var(--ink);letter-spacing:.005em;}
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;transition:color var(--fade) ease,background-color var(--fade) ease,border-color var(--fade) ease,opacity var(--fade) ease;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  section[id]{scroll-margin-top:72px;}
+
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:.75rem 1.25rem;z-index:300;border-radius:0 0 8px 0;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);}
+
+  .kicker{font-family:var(--font-body);font-size:.74rem;font-weight:600;color:var(--accent-deep);letter-spacing:.22em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.7rem;}
+  .kicker::before{content:"";width:26px;height:1px;background:var(--accent);display:inline-block;}
+
+  /* header */
+  header{position:sticky;top:0;z-index:200;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .nav-row{display:flex;align-items:center;gap:1.5rem;padding-top:.75rem;padding-bottom:.75rem;}
+  .brand{display:flex;align-items:center;gap:.7rem;flex:none;}
+  .brand-logo{width:42px;height:42px;display:block;border-radius:12px;}
+  .brand-word{font-family:var(--font-head);font-size:1.45rem;font-weight:600;letter-spacing:.16em;line-height:1;white-space:nowrap;}
+  .brand-word small{display:block;font-family:var(--font-body);font-size:.55rem;font-weight:500;letter-spacing:.2em;color:var(--ink-soft);margin-top:5px;text-transform:uppercase;}
+  nav.primary{display:flex;align-items:center;justify-content:center;gap:2rem;flex:1;}
+  nav.primary a{font-size:.88rem;font-weight:500;color:var(--ink-soft);position:relative;padding:.2rem 0;letter-spacing:.02em;}
+  nav.primary a:hover{color:var(--ink);}
+  nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  .header-actions{display:flex;align-items:center;gap:.75rem;margin-left:auto;}
+
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;transition:border-color var(--fade-theme) ease;}
+  .lang-switch button{background:none;border:none;padding:.4rem .65rem;font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--ink-soft);transition:background-color var(--fade) ease,color var(--fade) ease;}
+  .lang-switch button:hover{color:var(--ink);}
+  .lang-switch button[aria-pressed="true"]{background:var(--ink);color:var(--bg);}
+
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:1px solid var(--line);background:none;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);flex:none;transition:border-color var(--fade) ease,color var(--fade) ease,background-color var(--fade) ease;}
+  .icon-btn:hover{border-color:var(--accent);color:var(--accent-deep);}
+  .icon-btn svg{width:1.05rem;height:1.05rem;}
+
+  .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.55rem;border-radius:999px;font-weight:500;font-size:.86rem;letter-spacing:.04em;border:1px solid transparent;transition:background-color var(--fade) ease,color var(--fade) ease,border-color var(--fade) ease,box-shadow var(--fade) ease;white-space:nowrap;cursor:pointer;font-family:var(--font-body);}
+  .btn svg{width:1rem;height:1rem;flex:none;}
+  .btn-solid{background:var(--ink);color:var(--bg);}
+  .btn-solid:hover{background:var(--accent);color:#171514;}
+  .btn-line{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-line:hover{background:var(--panel);border-color:var(--accent);}
+  .btn-sm{padding:.6rem 1.15rem;font-size:.8rem;}
+  .hero .btn-solid{background:#FAF8F5;color:#171514;}
+  .hero .btn-solid:hover{background:var(--accent);color:#171514;}
+  .hero .btn-line{color:#fff;border-color:rgba(255,255,255,.5);}
+  .hero .btn-line:hover{background:rgba(255,255,255,.14);border-color:#fff;}
+
+  .menu-toggle{display:none;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--line);background:none;position:relative;flex:none;transition:border-color var(--fade) ease,background-color var(--fade) ease;}
+  .menu-toggle:hover{border-color:var(--accent);}
+  .menu-toggle i{position:absolute;left:50%;top:50%;width:18px;height:1.5px;margin-left:-9px;background:var(--ink);border-radius:2px;transition:transform .35s ease,opacity .25s ease,background-color var(--fade) ease;}
+  .menu-toggle i:nth-child(1){transform:translateY(-6px);}
+  .menu-toggle i:nth-child(3){transform:translateY(6px);}
+  .menu-toggle:hover i{background:var(--accent-deep);}
+  .menu-toggle[aria-expanded="true"] i:nth-child(1){transform:rotate(45deg);}
+  .menu-toggle[aria-expanded="true"] i:nth-child(2){opacity:0;}
+  .menu-toggle[aria-expanded="true"] i:nth-child(3){transform:rotate(-45deg);}
+
+  /* mobile + tablet menu panel */
+  .mobile-nav{position:fixed;inset:0;z-index:190;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.5rem;padding:5.5rem clamp(1.5rem,6vw,4rem) 2.5rem;overflow-y:auto;
+    visibility:hidden;pointer-events:none;clip-path:circle(0px at calc(100% - 2.6rem) 2.2rem);
+    transition:clip-path .75s cubic-bezier(.7,0,.2,1),visibility 0s linear .75s,background-color var(--fade-theme) ease;}
+  .mobile-nav.open{visibility:visible;pointer-events:auto;clip-path:circle(160% at calc(100% - 2.6rem) 2.2rem);
+    transition:clip-path .75s cubic-bezier(.7,0,.2,1),visibility 0s linear 0s,background-color var(--fade-theme) ease;}
+  .m-link{font-family:var(--font-head);font-weight:500;font-size:clamp(2rem,7vw,2.9rem);line-height:1.2;color:var(--ink);padding:.25rem 0;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease,color var(--fade) ease;}
+  .m-link:hover{color:var(--accent-deep);}
+  .mobile-nav.open .m-link,.mobile-nav.open .m-extra{opacity:1;transform:none;transition-delay:calc(.3s + var(--i,0) * .07s);}
+  .mobile-nav.open .m-link:hover{transition-delay:0s;}
+  .m-extra{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+  .m-contact{margin-top:1.6rem;color:var(--ink-soft);font-size:.92rem;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+  .mobile-nav.open .m-contact{opacity:1;transform:none;transition-delay:.9s;}
+  .m-contact a{color:var(--ink);font-weight:500;}
+  .m-contact a:hover{color:var(--accent-deep);}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;min-height:clamp(600px,92vh,840px);display:flex;align-items:center;padding:clamp(4rem,9vw,7rem) 0;}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(160deg,#2A2420,#5A4C3F);}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,16,13,.45) 0%,rgba(20,16,13,.62) 55%,rgba(20,16,13,.85) 100%),linear-gradient(90deg,rgba(20,16,13,.5) 0%,rgba(20,16,13,.1) 65%);}
+  .hero .wrap{position:relative;z-index:2;width:100%;}
+  .hero-copy{max-width:41rem;}
+  .hero-copy .kicker{color:#E6D3BC;}
+  .hero-copy .kicker::before{background:#E6D3BC;}
+  .hero-copy h1{color:#fff;font-size:clamp(2.7rem,6.2vw,5rem);line-height:1.02;font-weight:500;margin:1rem 0 1.3rem;text-shadow:0 2px 26px rgba(0,0,0,.3);}
+  .hero-copy p.lede{font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(255,255,255,.86);max-width:50ch;margin-bottom:1.6rem;font-weight:300;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem;}
+  .chip{display:inline-flex;align-items:center;padding:.4rem .95rem;border:1px solid rgba(255,255,255,.3);border-radius:999px;color:#fff;font-size:.8rem;font-weight:500;letter-spacing:.04em;background:rgba(255,255,255,.06);}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;}
+  .hero-pause{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:1.8rem;z-index:3;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(20,16,13,.5);color:#fff;display:flex;align-items:center;justify-content:center;transition:border-color var(--fade) ease,background-color var(--fade) ease;}
+  .hero-pause:hover{border-color:#fff;background:rgba(20,16,13,.75);}
+  .hero-pause svg{width:1rem;height:1rem;}
+
+  .strip{border-bottom:1px solid var(--line);background:var(--card);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .strip .wrap{padding-top:1.2rem;padding-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:.6rem 2rem;flex-wrap:wrap;text-align:center;}
+  .strip span{font-size:.78rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+  .strip i{width:4px;height:4px;border-radius:50%;background:var(--accent);display:inline-block;}
+
+  section{padding:clamp(3.6rem,8vw,6.5rem) 0;transition:background-color var(--fade-theme) ease;}
+  .section-head{max-width:60ch;margin-bottom:clamp(2.2rem,4vw,3rem);}
+  .section-head h2,.about-grid h2,.contact-title{font-size:clamp(2.1rem,4vw,3.3rem);margin:.8rem 0 .9rem;line-height:1.08;}
+  .section-head p{color:var(--ink-soft);font-size:1.03rem;}
+  .panel{background:var(--panel);}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5rem);align-items:center;}
+  .about-text{color:var(--ink-soft);font-size:1.04rem;max-width:56ch;margin-bottom:1.1rem;}
+  .about-note{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--line);font-family:var(--font-head);font-size:1.2rem;font-style:italic;color:var(--ink);max-width:46ch;}
+  .fact-card{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:.6rem 1.8rem;transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .fact{display:flex;gap:1.2rem;padding:1.5rem 0;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .fact:last-child{border-bottom:none;}
+  .fact-n{font-family:var(--font-head);font-size:1.9rem;line-height:1;color:var(--accent);flex:none;width:2.4rem;}
+  .fact h3{font-size:1.4rem;margin-bottom:.25rem;}
+  .fact p{font-size:.92rem;color:var(--ink-soft);}
+
+  /* prices */
+  .price-wrap{max-width:880px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:clamp(1.8rem,5vw,3.6rem) clamp(1.2rem,5vw,3.6rem);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .price-head{text-align:center;margin-bottom:1.6rem;}
+  .price-head h2{font-size:clamp(2.6rem,6vw,4.2rem);font-weight:400;letter-spacing:.04em;line-height:1;}
+  .price-sub{margin-top:.9rem;font-size:.8rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);}
+  .tabs{display:flex;justify-content:center;gap:.4rem;margin:0 auto 1.8rem;flex-wrap:wrap;}
+  .tab{background:none;border:none;padding:.65rem 1.3rem;font-size:.82rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);position:relative;}
+  .tab::after{content:"";position:absolute;left:1.3rem;right:1.3rem;bottom:.2rem;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:center;transition:transform .3s ease;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);}
+  .tab[aria-selected="true"]::after{transform:scaleX(1);}
+  .plist{border-top:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .plist li{display:grid;grid-template-columns:1fr auto;align-items:center;border-bottom:1px solid var(--line);transition:background-color var(--fade) ease,border-color var(--fade-theme) ease;}
+  .plist li:hover{background:var(--panel);}
+  .pn{padding:1.05rem 1rem 1.05rem .4rem;font-size:.88rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;}
+  .pp{align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:8.5rem;padding:0 1rem;border-left:1px solid var(--line);font-size:.9rem;font-weight:500;letter-spacing:.08em;white-space:nowrap;transition:border-color var(--fade-theme) ease;}
+  .panel-tab:not([hidden]){animation:tabIn .5s ease both;}
+  @keyframes tabIn{from{opacity:0;}to{opacity:1;}}
+  .price-note{margin-top:1.6rem;text-align:center;font-size:.88rem;color:var(--ink-soft);}
+  .price-cta{margin-top:1.4rem;display:flex;justify-content:center;}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,4vw,3rem);}
+  .step{padding-top:1.5rem;border-top:1px solid var(--line);position:relative;transition:border-color var(--fade-theme) ease;}
+  .step::before{content:"";position:absolute;top:-1px;left:0;width:3rem;height:1px;background:var(--accent);}
+  .step-n{font-family:var(--font-head);font-size:2.4rem;line-height:1;color:var(--accent);margin-bottom:.6rem;}
+  .step h3{font-size:1.5rem;margin-bottom:.4rem;}
+  .step p{color:var(--ink-soft);font-size:.95rem;max-width:34ch;}
+
+  /* instagram band */
+  .insta{text-align:center;}
+  .insta .inner{max-width:640px;margin:0 auto;}
+  .insta h2{font-size:clamp(2rem,4vw,3rem);margin:.8rem 0 .8rem;}
+  .insta p{color:var(--ink-soft);margin-bottom:1.6rem;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;}
+  .contact-lede{color:var(--ink-soft);font-size:1.03rem;max-width:46ch;margin-bottom:1.8rem;}
+  .info-list{border-top:1px solid var(--line);margin-bottom:1.6rem;transition:border-color var(--fade-theme) ease;}
+  .info-item{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .info-item .label{font-size:.72rem;font-weight:600;color:var(--accent-deep);letter-spacing:.18em;text-transform:uppercase;padding-top:.3rem;}
+  .info-item .value a{font-weight:500;}
+  .info-item .value a:hover{color:var(--accent-deep);}
+  .btn-row{display:flex;flex-wrap:wrap;gap:.8rem;}
+  .form-card{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:clamp(1.4rem,3vw,2.2rem);transition:background-color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem;}
+  .field label{font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+  .field label i{color:var(--accent-deep);font-style:normal;}
+  .field input,.field select,.field textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:.8rem .95rem;width:100%;transition:border-color var(--fade) ease,box-shadow var(--fade) ease,background-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  .field textarea{resize:vertical;min-height:110px;}
+  .field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ink-soft);}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(166,139,111,.25);}
+  .field.invalid input{border-color:#C0392B;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-note{font-size:.82rem;color:var(--ink-soft);margin-top:.9rem;}
+  .form-error{font-size:.85rem;color:#C0392B;margin-top:.8rem;min-height:1.2em;font-weight:500;}
+
+  /* footer */
+  footer{background:var(--panel);color:var(--ink);border-top:1px solid var(--line);transition:background-color var(--fade-theme) ease,color var(--fade-theme) ease,border-color var(--fade-theme) ease;}
+  .footer-main{padding:3rem 0 2rem;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--line);transition:border-color var(--fade-theme) ease;}
+  .footer-brand p{max-width:32ch;font-size:.9rem;color:var(--ink-soft);margin-top:1rem;}
+  .footer-links{display:flex;gap:3rem;flex-wrap:wrap;}
+  .footer-links h4{font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9rem;}
+  .footer-links a{display:block;color:var(--ink-soft);font-size:.92rem;margin-bottom:.5rem;}
+  .footer-links a:hover{color:var(--accent-deep);text-decoration:underline;}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;font-size:.82rem;color:var(--ink-soft);align-items:center;}
+  .footer-lang{display:flex;gap:.5rem;}
+  .footer-lang button{background:none;border:1px solid var(--line);color:var(--ink);padding:.3rem .65rem;border-radius:999px;font-size:.72rem;font-weight:600;transition:background-color var(--fade) ease,border-color var(--fade) ease,color var(--fade) ease;}
+  .footer-lang button:hover{border-color:var(--accent);}
+  .footer-lang button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);}
+
+  /* reveal on scroll */
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease,background-color var(--fade-theme) ease,border-color var(--fade-theme) ease,color var(--fade-theme) ease;}
+  .js .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){ .js .reveal{opacity:1;transform:none;} }
+
+  /* tablet */
+  @media (max-width:1023px){
+    nav.primary{display:none;}
+    .menu-toggle{display:block;}
+    .header-actions .btn{display:none;}
+    .about-grid,.contact-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;gap:2rem;}
+  }
+  /* mobile */
+  @media (max-width:640px){
+    .lang-switch{display:none;}
+    .brand-word small{display:none;}
+    .brand-word{font-size:1.3rem;}
+    .form-row{grid-template-columns:1fr;gap:0;}
+    .info-item{grid-template-columns:1fr;gap:.2rem;}
+    .footer-grid{flex-direction:column;}
+    .hero-pause{bottom:1.5rem;}
+    .pn{font-size:.78rem;letter-spacing:.07em;padding-right:.6rem;}
+    .pp{min-width:6.4rem;padding:0 .6rem;font-size:.82rem;}
+    .tab{padding:.6rem .8rem;font-size:.76rem;}
+    .tab::after{left:.8rem;right:.8rem;}
+    .strip span{font-size:.7rem;letter-spacing:.12em;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip">Pāriet uz saturu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="ic-phone"><path d="M7 3h3l1.5 4L9.5 8.5c.8 2.3 2.7 4.2 5 5l1.5-2L20 13v3a2 2 0 0 1-2.2 2C11.5 17.6 6.4 12.5 5.9 6.2A2 2 0 0 1 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="ic-pin"><path d="M12 21s-7-7.2-7-12a7 7 0 1 1 14 0c0 4.8-7 12-7 12Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/></g>
+    <g id="ic-mail"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m4 7.5 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="ic-ig"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></g>
+    <g id="ic-arrow"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-sun"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.1" y1="5.1" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="18.9" y2="18.9"/><line x1="5.1" y1="18.9" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="18.9" y2="5.1"/></g></g>
+    <g id="ic-moon"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="ic-pause"><rect x="6" y="4.5" width="4.5" height="15" rx="1" fill="currentColor"/><rect x="13.5" y="4.5" width="4.5" height="15" rx="1" fill="currentColor"/></g>
+    <g id="ic-play"><path d="M6 4.5v15l14-7.5z" fill="currentColor"/></g>
+  </defs>
+</svg>
+
+<a id="home"></a>
+<header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#home" aria-label="SKINVIT">
+      <img src="logo.svg" alt="" class="brand-logo" width="42" height="42">
+      <span class="brand-word">SKINVIT<small data-i18n="slogan">Estētiskās kosmetoloģijas centrs</small></span>
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <a href="#about" data-i18n="nav.about">Par mums</a>
+      <a href="#prices" data-i18n="nav.prices">Cenrādis</a>
+      <a href="#how" data-i18n="nav.how">Kā pieteikties</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakti</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang="lv" aria-pressed="true">LV</button>
+        <button data-lang="ru" aria-pressed="false">RU</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="Dark mode" aria-pressed="false">
+        <svg viewBox="0 0 24 24" id="themeIcon"><use href="#ic-moon"/></svg>
+      </button>
+      <a class="btn btn-solid btn-sm" href="#contact"><span data-i18n="cta_book">Pieteikties</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
+  <a class="m-link" style="--i:0" href="#about" data-i18n="nav.about">Par mums</a>
+  <a class="m-link" style="--i:1" href="#prices" data-i18n="nav.prices">Cenrādis</a>
+  <a class="m-link" style="--i:2" href="#how" data-i18n="nav.how">Kā pieteikties</a>
+  <a class="m-link" style="--i:3" href="#contact" data-i18n="nav.contact">Kontakti</a>
+  <div class="m-extra" style="--i:4">
+    <div class="lang-switch" role="group" aria-label="Language" style="display:flex;">
+      <button data-lang="lv" aria-pressed="true">LV</button>
+      <button data-lang="ru" aria-pressed="false">RU</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-solid btn-sm" href="#contact"><span data-i18n="cta_book">Pieteikties</span></a>
+  </div>
+  <p class="m-contact"><a href="tel:+37120204044">+371 20 204 044</a> &nbsp;|&nbsp; <a href="mailto:info@skinvit.lv">info@skinvit.lv</a></p>
+</nav>
+
+<main id="main">
+
+  <section class="hero">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://assets.mixkit.co/videos/51177/51177-thumb-720-0.jpg">
+      <source src="https://assets.mixkit.co/videos/51177/51177-720.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="kicker" data-i18n="hero_kicker">Rēzekne, Brīvības iela 2/4</span>
+        <h1 data-i18n="hero_title">Skaistums sākas ar ādas veselību</h1>
+        <p class="lede" data-i18n="hero_lede">SKINVIT - estētiskās kosmetoloģijas centrs Rēzeknē. Sejas un ķermeņa procedūras, aparātprocedūras un profesionāla kopšana.</p>
+        <div class="hero-chips">
+          <span class="chip" data-i18n="chip1">Sejas procedūras</span>
+          <span class="chip" data-i18n="chip2">Ķermeņa procedūras</span>
+          <span class="chip" data-i18n="chip3">Aparātprocedūras</span>
+        </div>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#contact"><span data-i18n="cta_book">Pieteikties</span><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></a>
+          <a class="btn btn-line" href="#prices"><span data-i18n="cta_prices">Skatīt cenrādi</span></a>
+        </div>
+      </div>
+    </div>
+    <button class="hero-pause" id="heroPause" aria-label="Pause background video" aria-pressed="false">
+      <svg viewBox="0 0 24 24" id="heroPauseIcon"><use href="#ic-pause"/></svg>
+    </button>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span data-i18n="strip1">Sejas procedūras</span><i></i>
+      <span data-i18n="strip2">Ķermeņa procedūras</span><i></i>
+      <span data-i18n="strip3">Aparātprocedūras</span><i></i>
+      <span data-i18n="strip4">Vaksācija</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="kicker" data-i18n="about_kicker">Par centru</span>
+        <h2 data-i18n="about_title">Profesionāla kopšana ādai un ķermenim</h2>
+        <p class="about-text" data-i18n="about_p1">SKINVIT ir estētiskās kosmetoloģijas centrs Rēzeknē. Piedāvājam sejas un ķermeņa procedūras - no klasiskās masāžas un ādas tīrīšanas līdz anti-age procedūrām, pīlingiem un aparātprocedūrām.</p>
+        <p class="about-text" data-i18n="about_p2">Procedūru var izvēlēties atbilstoši jūsu ādas un ķermeņa vajadzībām - precīzu cenu un piemērotāko variantu noskaidrojam pierakstoties.</p>
+        <p class="about-note" data-i18n="about_note">Kopšanā izmantojam profesionālo kosmētiku, tostarp Histomer.</p>
+      </div>
+      <div class="fact-card reveal">
+        <div class="fact"><span class="fact-n">01</span><div><h3 data-i18n="fact1_t">Sejas procedūras</h3><p data-i18n="fact1_d">Masāža, tīrīšana, kopšana, anti-age procedūras un ādas atjaunojošie pīlingi.</p></div></div>
+        <div class="fact"><span class="fact-n">02</span><div><h3 data-i18n="fact2_t">Ķermeņa procedūras</h3><p data-i18n="fact2_d">Ķermeņa un limfodrenāžas masāža, liftinga procedūras un kavitācija.</p></div></div>
+        <div class="fact"><span class="fact-n">03</span><div><h3 data-i18n="fact3_t">Aparātprocedūras</h3><p data-i18n="fact3_d">Mūsdienīgas aparātu procedūras sejai un ķermenim.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices" class="panel">
+    <div class="wrap">
+      <div class="price-wrap reveal">
+        <div class="price-head">
+          <h2 data-i18n="prices_title">Cenrādis</h2>
+          <p class="price-sub" id="priceSub">Sejas procedūras</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Cenrādis">
+          <button class="tab" role="tab" id="tab-face" aria-selected="true" aria-controls="panel-face" data-tab="face" data-i18n="tab_face">Sejas procedūras</button>
+          <button class="tab" role="tab" id="tab-body" aria-selected="false" aria-controls="panel-body" data-tab="body" tabindex="-1" data-i18n="tab_body">Ķermeņa procedūras</button>
+        </div>
+        <div class="panel-tab" id="panel-face" role="tabpanel" aria-labelledby="tab-face"><ul class="plist" id="listFace"></ul></div>
+        <div class="panel-tab" id="panel-body" role="tabpanel" aria-labelledby="tab-body" hidden><ul class="plist" id="listBody"></ul></div>
+        <p class="price-note" data-i18n="price_note">Cenu diapazons atkarīgs no izvēlētās procedūras - precīzu cenu noskaidrojam pierakstoties.</p>
+        <div class="price-cta"><a class="btn btn-solid" href="#contact"><span data-i18n="cta_book">Pieteikties</span><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker" data-i18n="how_kicker">Kā pieteikties</span>
+        <h2 data-i18n="how_title">Trīs vienkārši soļi</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="step-n">01</div><h3 data-i18n="step1_t">Sazinieties</h3><p data-i18n="step1_d">Piezvaniet vai uzrakstiet mums, lai pieteiktos procedūrai.</p></div>
+        <div class="step reveal"><div class="step-n">02</div><h3 data-i18n="step2_t">Izvēlieties</h3><p data-i18n="step2_d">Kopā izvēlamies procedūru, kas atbilst jūsu vajadzībām.</p></div>
+        <div class="step reveal"><div class="step-n">03</div><h3 data-i18n="step3_t">Apmeklējiet</h3><p data-i18n="step3_d">Nāciet uz centru Brīvības ielā 2/4, Rēzeknē.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="insta" class="panel insta">
+    <div class="wrap">
+      <div class="inner reveal">
+        <span class="kicker" data-i18n="insta_kicker">Instagram</span>
+        <h2 data-i18n="insta_title">Sekojiet mums Instagram</h2>
+        <p data-i18n="insta_text">Procedūru piemēri, jaunumi un ieskats centrā - @skinvit_centrs.</p>
+        <a class="btn btn-line" href="https://www.instagram.com/skinvit_centrs/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-ig"/></svg><span>@skinvit_centrs</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="kicker" data-i18n="contact_kicker">Kontakti</span>
+        <h2 class="contact-title" data-i18n="contact_title">Pierakstieties pie mums</h2>
+        <p class="contact-lede" data-i18n="contact_lede">Zvaniet, rakstiet vai aizpildiet pieteikumu - atbildēsim un vienosimies par laiku.</p>
+        <div class="info-list">
+          <div class="info-item"><span class="label" data-i18n="lbl_address">Adrese</span><span class="value">Brīvības iela 2/4, Rēzekne</span></div>
+          <div class="info-item"><span class="label" data-i18n="lbl_phone">Tālrunis</span><span class="value"><a href="tel:+37120204044">+371 20 204 044</a></span></div>
+          <div class="info-item"><span class="label" data-i18n="lbl_email">E-pasts</span><span class="value"><a href="mailto:info@skinvit.lv">info@skinvit.lv</a></span></div>
+          <div class="info-item"><span class="label">Instagram</span><span class="value"><a href="https://www.instagram.com/skinvit_centrs/" target="_blank" rel="noopener">@skinvit_centrs</a></span></div>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="tel:+37120204044"><svg viewBox="0 0 24 24"><use href="#ic-phone"/></svg><span data-i18n="btn_call">Zvanīt</span></a>
+          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Br%C4%ABv%C4%ABbas+iela+2%2F4+R%C4%93zekne" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#ic-pin"/></svg><span data-i18n="map_btn">Apskatīt kartē</span></a>
+        </div>
+      </div>
+      <div class="form-card reveal">
+        <form id="reqForm" novalidate>
+          <div class="form-row">
+            <div class="field" id="fcName"><label for="fName"><span data-i18n="f_name">Vārds</span> <i>*</i></label><input id="fName" name="name" type="text" autocomplete="name"></div>
+            <div class="field" id="fcPhone"><label for="fPhone"><span data-i18n="f_phone">Tālrunis</span> <i>*</i></label><input id="fPhone" name="phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="field"><label for="fTopic" data-i18n="f_topic">Procedūra</label>
+            <select id="fTopic" name="topic">
+              <option value="face" data-i18n="tab_face">Sejas procedūras</option>
+              <option value="body" data-i18n="tab_body">Ķermeņa procedūras</option>
+              <option value="device" data-i18n="opt_device">Aparātprocedūras</option>
+              <option value="wax" data-i18n="opt_wax">Vaksācija</option>
+              <option value="other" data-i18n="opt_other">Cits jautājums</option>
+            </select>
+          </div>
+          <div class="field"><label for="fMsg" data-i18n="f_msg">Ziņojums</label><textarea id="fMsg" name="message"></textarea></div>
+          <button class="btn btn-solid" type="submit"><svg viewBox="0 0 24 24"><use href="#ic-mail"/></svg><span data-i18n="f_submit">Nosūtīt e-pastu</span></button>
+          <p class="form-error" id="formError" role="alert"></p>
+          <p class="form-note" data-i18n="f_note">Atvērsies e-pasta programma ar sagatavotu vēstuli - pārbaudiet un nosūtiet.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#home" aria-label="SKINVIT">
+          <img src="logo.svg" alt="" class="brand-logo" width="42" height="42">
+          <span class="brand-word">SKINVIT</span>
+        </a>
+        <p data-i18n="footer_tag">SKINVIT - estētiskās kosmetoloģijas centrs Rēzeknē.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4 data-i18n="nav.prices">Cenrādis</h4>
+          <a href="#prices" data-i18n="tab_face">Sejas procedūras</a>
+          <a href="#prices" data-i18n="tab_body">Ķermeņa procedūras</a>
+        </div>
+        <div>
+          <h4 data-i18n="nav.contact">Kontakti</h4>
+          <a href="tel:+37120204044">+371 20 204 044</a>
+          <a href="mailto:info@skinvit.lv">info@skinvit.lv</a>
+          <a href="https://www.instagram.com/skinvit_centrs/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="yr">2026</span> SKINVIT. <span data-i18n="footer_rights">Visas tiesības aizsargātas.</span></span>
+      <div class="footer-lang" role="group" aria-label="Language">
+        <button data-lang="lv" aria-pressed="true">LV</button>
+        <button data-lang="ru" aria-pressed="false">RU</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var PRICES = {
+    face:["30 EUR","20 EUR","40-60 EUR","40-60 EUR","40-70 EUR","40-70 EUR","5-20 EUR"],
+    body:["30-50 EUR","30 EUR","15 EUR","40-70 EUR","50-70 EUR","10-40 EUR"]
+  };
+  var T = {
+    lv: {
+      skip:"Pāriet uz saturu", slogan:"Estētiskās kosmetoloģijas centrs",
+      "nav.about":"Par mums","nav.prices":"Cenrādis","nav.how":"Kā pieteikties","nav.contact":"Kontakti",
+      cta_book:"Pieteikties", cta_prices:"Skatīt cenrādi",
+      theme_dark:"Tumšais režīms", theme_light:"Gaišais režīms",
+      menu_open:"Atvērt izvēlni", menu_close:"Aizvērt izvēlni",
+      video_pause:"Apturēt fona video", video_play:"Atskaņot fona video",
+      hero_kicker:"Rēzekne, Brīvības iela 2/4",
+      hero_title:"Skaistums sākas ar ādas veselību",
+      hero_lede:"SKINVIT - estētiskās kosmetoloģijas centrs Rēzeknē. Sejas un ķermeņa procedūras, aparātprocedūras un profesionāla kopšana.",
+      chip1:"Sejas procedūras", chip2:"Ķermeņa procedūras", chip3:"Aparātprocedūras",
+      strip1:"Sejas procedūras", strip2:"Ķermeņa procedūras", strip3:"Aparātprocedūras", strip4:"Vaksācija",
+      about_kicker:"Par centru", about_title:"Profesionāla kopšana ādai un ķermenim",
+      about_p1:"SKINVIT ir estētiskās kosmetoloģijas centrs Rēzeknē. Piedāvājam sejas un ķermeņa procedūras - no klasiskās masāžas un ādas tīrīšanas līdz anti-age procedūrām, pīlingiem un aparātprocedūrām.",
+      about_p2:"Procedūru var izvēlēties atbilstoši jūsu ādas un ķermeņa vajadzībām - precīzu cenu un piemērotāko variantu noskaidrojam pierakstoties.",
+      about_note:"Kopšanā izmantojam profesionālo kosmētiku, tostarp Histomer.",
+      fact1_t:"Sejas procedūras", fact1_d:"Masāža, tīrīšana, kopšana, anti-age procedūras un ādas atjaunojošie pīlingi.",
+      fact2_t:"Ķermeņa procedūras", fact2_d:"Ķermeņa un limfodrenāžas masāža, liftinga procedūras un kavitācija.",
+      fact3_t:"Aparātprocedūras", fact3_d:"Mūsdienīgas aparātu procedūras sejai un ķermenim.",
+      prices_title:"Cenrādis", tab_face:"Sejas procedūras", tab_body:"Ķermeņa procedūras",
+      price_note:"Cenu diapazons atkarīgs no izvēlētās procedūras - precīzu cenu noskaidrojam pierakstoties.",
+      face_items:["Klasiskā sejas masāža","Ekspress sejas tīrīšana","Sejas kopšanas procedūra","Anti-age procedūra","Ādas atjaunojošie pīlingi","Aparātprocedūras","Vaksācija"],
+      body_items:["Pilna ķermeņa masāža","Limfodrenāžas masāža","Presa liftinga procedūra","RF liftinga procedūra","Kavitācija","Vaksācija"],
+      how_kicker:"Kā pieteikties", how_title:"Trīs vienkārši soļi",
+      step1_t:"Sazinieties", step1_d:"Piezvaniet vai uzrakstiet mums, lai pieteiktos procedūrai.",
+      step2_t:"Izvēlieties", step2_d:"Kopā izvēlamies procedūru, kas atbilst jūsu vajadzībām.",
+      step3_t:"Apmeklējiet", step3_d:"Nāciet uz centru Brīvības ielā 2/4, Rēzeknē.",
+      insta_kicker:"Instagram", insta_title:"Sekojiet mums Instagram", insta_text:"Procedūru piemēri, jaunumi un ieskats centrā - @skinvit_centrs.",
+      contact_kicker:"Kontakti", contact_title:"Pierakstieties pie mums", contact_lede:"Zvaniet, rakstiet vai aizpildiet pieteikumu - atbildēsim un vienosimies par laiku.",
+      lbl_address:"Adrese", lbl_phone:"Tālrunis", lbl_email:"E-pasts", btn_call:"Zvanīt", map_btn:"Apskatīt kartē",
+      f_name:"Vārds", f_phone:"Tālrunis", f_topic:"Procedūra", f_msg:"Ziņojums",
+      opt_device:"Aparātprocedūras", opt_wax:"Vaksācija", opt_other:"Cits jautājums",
+      f_submit:"Nosūtīt e-pastu", f_note:"Atvērsies e-pasta programma ar sagatavotu vēstuli - pārbaudiet un nosūtiet.",
+      f_error:"Lūdzu, aizpildiet obligātos laukus.", mail_subject:"Pieteikums no SKINVIT mājas lapas",
+      footer_tag:"SKINVIT - estētiskās kosmetoloģijas centrs Rēzeknē.", footer_rights:"Visas tiesības aizsargātas.",
+      page_title:"SKINVIT - estētiskās kosmetoloģijas centrs, Rēzekne"
+    },
+    ru: {
+      skip:"К содержанию", slogan:"Центр эстетической косметологии",
+      "nav.about":"О центре","nav.prices":"Прайс","nav.how":"Как записаться","nav.contact":"Контакты",
+      cta_book:"Записаться", cta_prices:"Смотреть прайс",
+      theme_dark:"Тёмная тема", theme_light:"Светлая тема",
+      menu_open:"Открыть меню", menu_close:"Закрыть меню",
+      video_pause:"Остановить фоновое видео", video_play:"Воспроизвести фоновое видео",
+      hero_kicker:"Резекне, ул. Бривибас 2/4",
+      hero_title:"Красота начинается со здоровья кожи",
+      hero_lede:"SKINVIT - центр эстетической косметологии в Резекне. Процедуры для лица и тела, аппаратные процедуры и профессиональный уход.",
+      chip1:"Процедуры для лица", chip2:"Процедуры для тела", chip3:"Аппаратные процедуры",
+      strip1:"Процедуры для лица", strip2:"Процедуры для тела", strip3:"Аппаратные процедуры", strip4:"Воск",
+      about_kicker:"О центре", about_title:"Профессиональный уход за кожей и телом",
+      about_p1:"SKINVIT - центр эстетической косметологии в Резекне. Мы предлагаем процедуры для лица и тела - от классического массажа и чистки кожи до anti-age процедур, пилингов и аппаратных процедур.",
+      about_p2:"Процедуру можно подобрать под потребности вашей кожи и тела - точную стоимость и подходящий вариант уточним при записи.",
+      about_note:"В уходе используем профессиональную косметику, в том числе Histomer.",
+      fact1_t:"Процедуры для лица", fact1_d:"Массаж, чистка, уход, anti-age процедуры и омолаживающие пилинги кожи.",
+      fact2_t:"Процедуры для тела", fact2_d:"Массаж тела и лимфодренаж, лифтинг-процедуры и кавитация.",
+      fact3_t:"Аппаратные процедуры", fact3_d:"Современные аппаратные процедуры для лица и тела.",
+      prices_title:"Прайс", tab_face:"Процедуры для лица", tab_body:"Процедуры для тела",
+      price_note:"Диапазон цен зависит от выбранной процедуры - точную стоимость уточним при записи.",
+      face_items:["Классический массаж лица","Экспресс-чистка лица","Процедура по уходу за лицом","Anti-age процедура","Омолаживающие пилинги кожи","Аппаратные процедуры","Воск (депиляция)"],
+      body_items:["Массаж всего тела","Лимфодренажный массаж","Пресс-лифтинг процедура","RF-лифтинг процедура","Кавитация","Воск (депиляция)"],
+      how_kicker:"Как записаться", how_title:"Три простых шага",
+      step1_t:"Свяжитесь", step1_d:"Позвоните или напишите нам, чтобы записаться на процедуру.",
+      step2_t:"Выберите", step2_d:"Вместе подберём процедуру, которая подходит именно вам.",
+      step3_t:"Приходите", step3_d:"Ждём вас в центре по адресу Бривибас 2/4, Резекне.",
+      insta_kicker:"Instagram", insta_title:"Следите за нами в Instagram", insta_text:"Примеры процедур, новости и атмосфера центра - @skinvit_centrs.",
+      contact_kicker:"Контакты", contact_title:"Запишитесь к нам", contact_lede:"Позвоните, напишите или заполните заявку - ответим и договоримся о времени.",
+      lbl_address:"Адрес", lbl_phone:"Телефон", lbl_email:"E-mail", btn_call:"Позвонить", map_btn:"Смотреть на карте",
+      f_name:"Имя", f_phone:"Телефон", f_topic:"Процедура", f_msg:"Сообщение",
+      opt_device:"Аппаратные процедуры", opt_wax:"Воск (депиляция)", opt_other:"Другой вопрос",
+      f_submit:"Отправить письмо", f_note:"Откроется почтовая программа с готовым письмом - проверьте и отправьте.",
+      f_error:"Пожалуйста, заполните обязательные поля.", mail_subject:"Заявка с сайта SKINVIT",
+      footer_tag:"SKINVIT - центр эстетической косметологии в Резекне.", footer_rights:"Все права защищены.",
+      page_title:"SKINVIT - центр эстетической косметологии, Резекне"
+    },
+    en: {
+      skip:"Skip to content", slogan:"Aesthetic cosmetology centre",
+      "nav.about":"About","nav.prices":"Prices","nav.how":"How to book","nav.contact":"Contact",
+      cta_book:"Book now", cta_prices:"View prices",
+      theme_dark:"Dark mode", theme_light:"Light mode",
+      menu_open:"Open menu", menu_close:"Close menu",
+      video_pause:"Pause background video", video_play:"Play background video",
+      hero_kicker:"Rēzekne, Brīvības iela 2/4",
+      hero_title:"Beauty begins with healthy skin",
+      hero_lede:"SKINVIT - an aesthetic cosmetology centre in Rēzekne. Face and body treatments, device treatments and professional care.",
+      chip1:"Face treatments", chip2:"Body treatments", chip3:"Device treatments",
+      strip1:"Face treatments", strip2:"Body treatments", strip3:"Device treatments", strip4:"Waxing",
+      about_kicker:"About the centre", about_title:"Professional care for skin and body",
+      about_p1:"SKINVIT is an aesthetic cosmetology centre in Rēzekne. We offer face and body treatments - from classic massage and skin cleansing to anti-age treatments, peels and device treatments.",
+      about_p2:"You can choose a treatment to suit your skin and body - we confirm the exact price and the best option when you book.",
+      about_note:"We use professional cosmetics in our care, including Histomer.",
+      fact1_t:"Face treatments", fact1_d:"Massage, cleansing, care, anti-age treatments and skin renewing peels.",
+      fact2_t:"Body treatments", fact2_d:"Body and lymphatic drainage massage, lifting treatments and cavitation.",
+      fact3_t:"Device treatments", fact3_d:"Modern device treatments for face and body.",
+      prices_title:"Price list", tab_face:"Face treatments", tab_body:"Body treatments",
+      price_note:"The price range depends on the chosen treatment - we confirm the exact price when you book.",
+      face_items:["Classic facial massage","Express facial cleansing","Facial care treatment","Anti-age treatment","Skin renewing peels","Device treatments","Waxing"],
+      body_items:["Full body massage","Lymphatic drainage massage","Press lifting treatment","RF lifting treatment","Cavitation","Waxing"],
+      how_kicker:"How to book", how_title:"Three simple steps",
+      step1_t:"Get in touch", step1_d:"Call or write to us to book a treatment.",
+      step2_t:"Choose", step2_d:"Together we choose the treatment that suits your needs.",
+      step3_t:"Visit", step3_d:"Come to the centre at Brīvības iela 2/4, Rēzekne.",
+      insta_kicker:"Instagram", insta_title:"Follow us on Instagram", insta_text:"Treatment examples, news and a look inside the centre - @skinvit_centrs.",
+      contact_kicker:"Contact", contact_title:"Book with us", contact_lede:"Call, write or fill in the request - we will reply and agree on a time.",
+      lbl_address:"Address", lbl_phone:"Phone", lbl_email:"E-mail", btn_call:"Call", map_btn:"View on map",
+      f_name:"Name", f_phone:"Phone", f_topic:"Treatment", f_msg:"Message",
+      opt_device:"Device treatments", opt_wax:"Waxing", opt_other:"Other question",
+      f_submit:"Send e-mail", f_note:"Your e-mail app will open with a ready message - review and send.",
+      f_error:"Please fill in the required fields.", mail_subject:"Booking request from the SKINVIT website",
+      footer_tag:"SKINVIT - aesthetic cosmetology centre in Rēzekne.", footer_rights:"All rights reserved.",
+      page_title:"SKINVIT - aesthetic cosmetology centre, Rēzekne"
+    }
+  };
+
+  var htmlEl = document.documentElement;
+  var currentLang = 'lv';
+  var currentTab = 'face';
+  var pageTitleEl = document.getElementById('pageTitle');
+
+  function getTheme(){ return htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
+
+  function renderLists(){
+    var d = T[currentLang];
+    ['face','body'].forEach(function(k){
+      var ul = document.getElementById(k === 'face' ? 'listFace' : 'listBody');
+      ul.innerHTML = '';
+      d[k + '_items'].forEach(function(name, i){
+        var li = document.createElement('li');
+        var a = document.createElement('span'); a.className = 'pn'; a.textContent = name;
+        var b = document.createElement('span'); b.className = 'pp'; b.textContent = PRICES[k][i];
+        li.appendChild(a); li.appendChild(b); ul.appendChild(li);
+      });
+    });
+  }
+
+  function refreshLabels(){
+    var d = T[currentLang];
+    var theme = getTheme();
+    var tt = document.getElementById('themeToggle');
+    tt.setAttribute('aria-label', theme === 'dark' ? d.theme_light : d.theme_dark);
+    tt.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    document.getElementById('themeIcon').innerHTML = '<use href="' + (theme === 'dark' ? '#ic-sun' : '#ic-moon') + '"></use>';
+    var mt = document.getElementById('menuToggle');
+    mt.setAttribute('aria-label', mt.getAttribute('aria-expanded') === 'true' ? d.menu_close : d.menu_open);
+    var vid = document.getElementById('heroVideo');
+    document.getElementById('heroPause').setAttribute('aria-label', vid.paused ? d.video_play : d.video_pause);
+    document.getElementById('priceSub').textContent = currentTab === 'face' ? d.tab_face : d.tab_body;
+  }
+
+  function applyLang(lang){
+    if(!T[lang]) lang = 'lv';
+    currentLang = lang;
+    var d = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(d[k] !== undefined) el.textContent = d[k];
+    });
+    renderLists();
+    document.querySelectorAll('[data-lang]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    htmlEl.setAttribute('lang', lang);
+    if(pageTitleEl) pageTitleEl.textContent = d.page_title;
+    try{ localStorage.setItem('skv-lang', lang); }catch(e){}
+    var err = document.getElementById('formError'); if(err) err.textContent = '';
+    refreshLabels();
+  }
+
+  document.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+  });
+
+  /* theme */
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var next = getTheme() === 'dark' ? 'light' : 'dark';
+    htmlEl.setAttribute('data-theme', next);
+    try{ localStorage.setItem('skv-theme', next); }catch(e){}
+    refreshLabels();
+  });
+
+  /* price tabs */
+  var tabs = document.querySelectorAll('.tab');
+  function showTab(name, focus){
+    currentTab = name;
+    tabs.forEach(function(t){
+      var on = t.getAttribute('data-tab') === name;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+      if(on && focus) t.focus();
+    });
+    document.getElementById('panel-face').hidden = name !== 'face';
+    document.getElementById('panel-body').hidden = name !== 'body';
+    refreshLabels();
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ showTab(t.getAttribute('data-tab'), false); });
+    t.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        e.preventDefault();
+        showTab(currentTab === 'face' ? 'body' : 'face', true);
+      }
+    });
+  });
+
+  /* mobile + tablet menu */
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileNav = document.getElementById('mobileNav');
+  function setMenu(open){
+    mobileNav.classList.toggle('open', open);
+    mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    refreshLabels();
+  }
+  menuToggle.addEventListener('click', function(){ setMenu(!mobileNav.classList.contains('open')); });
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && mobileNav.classList.contains('open')) setMenu(false); });
+  window.addEventListener('resize', function(){ if(window.innerWidth >= 1024 && mobileNav.classList.contains('open')) setMenu(false); });
+
+  /* hero video */
+  var vid = document.getElementById('heroVideo');
+  var pauseBtn = document.getElementById('heroPause');
+  var pauseIcon = document.getElementById('heroPauseIcon');
+  function setPauseIcon(){ pauseIcon.innerHTML = '<use href="' + (vid.paused ? '#ic-play' : '#ic-pause') + '"></use>'; pauseBtn.setAttribute('aria-pressed', vid.paused ? 'true' : 'false'); refreshLabels(); }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ try{ vid.pause(); }catch(e){} }
+  pauseBtn.addEventListener('click', function(){
+    if(vid.paused){ var p = vid.play(); if(p && p.catch) p.catch(function(){}); } else { vid.pause(); }
+    setPauseIcon();
+  });
+
+  /* request form -> e-mail */
+  document.getElementById('reqForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var d = T[currentLang];
+    var name = document.getElementById('fName').value.trim();
+    var phone = document.getElementById('fPhone').value.trim();
+    var sel = document.getElementById('fTopic');
+    var topic = sel.options[sel.selectedIndex].text;
+    var msg = document.getElementById('fMsg').value.trim();
+    var okName = name.length > 1;
+    var okPhone = phone.replace(/[^0-9]/g,'').length >= 6;
+    document.getElementById('fcName').classList.toggle('invalid', !okName);
+    document.getElementById('fcPhone').classList.toggle('invalid', !okPhone);
+    var err = document.getElementById('formError');
+    if(!okName || !okPhone){ err.textContent = d.f_error; return; }
+    err.textContent = '';
+    var lines = [d.f_name + ': ' + name, d.f_phone + ': ' + phone, d.f_topic + ': ' + topic];
+    if(msg) lines.push('', msg);
+    window.location.href = 'mailto:info@skinvit.lv?subject=' + encodeURIComponent(d.mail_subject) + '&body=' + encodeURIComponent(lines.join('\r\n'));
+  });
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var saved = 'lv';
+  try{ saved = localStorage.getItem('skv-lang') || 'lv'; }catch(e){}
+  applyLang(saved);
+  setPauseIcon();
+})();
+</script>
+
+</body>
+</html>
